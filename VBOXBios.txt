@@ -1,0 +1,6 @@
+C:\Program Files\VirtualBox>VBoxManage setextradata "Win7" "VBoxInternal/Devices/pcbios/0/Config/DmiSystemVendor" "Dell"
+C:\Program Files\VirtualBox>VBoxManage setextradata "Win7" "VBoxInternal/Devices/pcbios/0/Config/DmiSystemProduct" "Optiplex"
+C:\Program Files\VirtualBox>VBoxManage setextradata "Win7" "VBoxInternal/Devices/pcbios/0/Config/DmiBIOSVendor" "Phoenix"
+C:\Program Files\VirtualBox>VBoxManage setextradata "Win7" "VBoxInternal/Devices/pcbios/0/Config/DmiBIOSVersion" "1.0.1"
+
+
