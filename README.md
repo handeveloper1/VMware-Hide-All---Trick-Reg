@@ -64,6 +64,8 @@ VirtualBox:
 \HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\VBox*
 \HKEY_LOCAL_MACHINE\SOFTWARE\Oracle\VirtualBox Guest Additions*
 
+![image](https://user-images.githubusercontent.com/36090819/208015484-d800e0c0-9cc5-4b3a-a28d-499d3629a819.png)
+![image](https://user-images.githubusercontent.com/36090819/208015504-256d52b6-f1b7-4265-a60e-29365885407d.png)
 
 
 
@@ -130,6 +132,7 @@ C:\windows\System32\vboxservice.exe
 C:\windows\System32\vboxtray.exe
 C:\windows\System32\VBoxControl.exe
 
+![image](https://user-images.githubusercontent.com/36090819/208015527-560db1cb-06b7-4ed4-848a-678e66db25cc.png)
 
 
 
