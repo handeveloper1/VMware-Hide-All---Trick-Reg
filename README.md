@@ -1,4 +1,6 @@
-Sanal makineler gerçek makineleri simüle etmek için oluşturulmuştur. Bir makinenin fiziksel mi sanal mı olduğunun anlaşılabilmesi için bazı yapılar sanal makine üzerinde gizlenmiştir. Bunlar:
+Sanal makineler gerçek makineleri simüle etmek için oluşturulmuştur. Bir makinenin fiziksel mi sanal mı olduğunun anlaşılabilmesi için bazı yapılar sanal makine üzerinde gizlenmiştir.
+
+Bunlar:
 Dosyalar
 Kayıt Anahtarları (Register Keys)
 İşlemler (Processes)
@@ -6,19 +8,29 @@ Servisler
 Ağ Cihaz Adaptörleri
 Sanal Makine Tespit Yöntemleri
 Zararlı yazılımlar ortamın sanal olup olmadığını tespit edebilmek için şuan için 7 yöntem kullanmaktadır.
+
+
 1-CPU Komutlarının Kontrol Edilmesi
+
 a-)CPUID
 Zararlı yazılımlar, sanal ortamların varlığını tanımlayabilmek için belirli bir girdi sağlayan CPUID instruction’ını çağırırlar.
 CPUID komutu, EAX=1 girişi ile çalışırsa, dönüş değeri işlemcinin özelliğini belirler. Fiziksel bir makinenin ECX’inin ilk 31 biti 0’dır. Guest WM’de bu bitler 1’dir.
 EAX=0 ile CPUID instruction’ının çağrılması, CPU’nun üretici kimliğini döndürür. Bu dizi EBX, EDX ve ECX kayıtlarında saklanacak 12 karakterli bir ASCII’dir.
 Fiziksel AMD veya INtel CPU çalıştıran bir makine için bu dizi değeri sırasıyla “AuthenticAMD” veya “GenuineIntel” olacaktır. WMware veya Hyper-V çalıştıran bir makine için bu dizi değeri “VMwareVMware” veya “Microsoft HV” olacaktır.
 Zararlı yazılım, EAX=40000000 girişiyle CPUID instruction’ını çağırır. Geri dönüş değeri ile EAX, ECS, EDX’e kaydedilen sanallaştırma dizisini elde eder. Örneğin Microsoft için “Microsoft HV” veya VMware için “VMwareVMware” alır.
+
 b-) MMX
 Bu Intel instructions seti, grafik uygulamaların daha hızlı işlenmesi için kullanılır. Genel olarak sanal makineler bunu desteklemez. Bu nedenle zararlı yazılım MMX kontrolü yaparak sanal makineyi tespit edebilir.
 Ana makine üzerinden CPUID değeri değiştirilebilmektedir. Bunun için VM’in kurulu olduğu dizine geçerek VM’nin config dosyasını (.vmx) açınız. Config dosyasının sonuna aşağıdaki satırı ekleyip kaydediniz. Sonrasında VM’i yeniden başlattığınızda CPUID tekniğini atlatmış olursunuz.
 cpuid.1.ecx=”0—:—-:—-:—-:—-:—-:—-:—-“
+
+
+
 2- VMware Magic Number
 WMware ile ana bilgisayar arasındaki iletişim belirli bir I/O portları üzerinden yapılmaktadır. Zararlı yazılım bu portları kontrol eder, dönen bir cevap var ise sistemin sanal olduğunu anlar.
+
+
+
 3- MAC Adresin Kontrol Edilmesi
 Zararlı yazılım MAC adresinin önekini belli komutlar ile kontrol ederek bir sanal makine içinde olup olmadığını kontrol edebilir. Sanal makinelerin ürünlere göre kullandığı MAC adreslerinin önekleri:
 Vmware:
@@ -36,6 +48,8 @@ Hyper-V:
  
 4- Kayıt Anahtarları (Registry Keys)
 Zararlı yazılım, belirli anahtarları aramak için kayıt defteri anahtarlarını kullanabilir; bu tür anahtarların varlığı, sanallaştırma yazılımının varlığını gösterir.
+
+
 Genel:
 HKEY_LOCAL_MACHINE\HARDWARE\DEVICEMAP\Scsi\Scsi\Port 0\Scsi Bus 0\Target Id 0\Logical Unit Id 0\"Identifier"; "< value >"
 HKEY_LOCAL_MACHINE\HARDWARE\DESCRIPTION\System\SystemBiosVersion\"SystemBiosVersion";"< value >"
@@ -49,6 +63,8 @@ VirtualBox:
 \HKEY_LOCAL_MACHINE\HARDWARE\ACPI\RSDT\VBOX__
 \HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\VBox*
 \HKEY_LOCAL_MACHINE\SOFTWARE\Oracle\VirtualBox Guest Additions*
+
+
 
 
 
@@ -73,8 +89,13 @@ vboxservice.exe
 boxtray.exe
  
  
+
+
 6- VM Dosyalarının Kontrol Edilmesi
 Zararlı yazılım herhangi bir VM dosyanın varlığı ile sanal ortamda bulunduğunu anlayabilir.
+
+
+
 VMWare:
 C:\windows\System32\Drivers\Vmmouse.sys
 C:\windows\System32\Drivers\mv3dgl.dll
@@ -87,6 +108,9 @@ C:\windows\System32\Drivers\vmhgfs.dll
 C:\windows\System32\Drivers\vmGuestLib.dll
 C:\windows\System32\Drivers\vmGuestLibJava.dll
 C:\windows\System32\Drivers\vmhgfs.dll
+
+
+
 VirtualBox:
 C:\windows\System32\Drivers\VBoxMouse.sys
 C:\windows\System32\Drivers\VBoxGuest.sys
@@ -106,7 +130,12 @@ C:\windows\System32\vboxservice.exe
 C:\windows\System32\vboxtray.exe
 C:\windows\System32\VBoxControl.exe
 
+
+
+
+
 7- VM Servislerinin Kontrol Edilmesi
+
 Bazı çalışan servislerin varlığı, VM varlığının bir göstergesidir.
 Bu sevisler:
 VMTools
